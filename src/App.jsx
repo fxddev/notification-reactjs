@@ -1,48 +1,25 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import * as React from 'react';
 
-import Inbox from './pages/Inbox'
-import SendEmail from './pages/SendEmail'
-import Starred from './pages/Starred'
+import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// function Home() {
-//   return <h2>Home</h2>;
-// }
-
-// function About() {
-//   return <h2>About</h2>;
-// }
-
-// function Contact() {
-//   return <h2>Contact</h2>;
-// }
+import MyRoutes from './MyRoutes'
 
 function App() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/send-email">SendEmail</Link>
-            </li>
-          </ul>
-        </nav>
 
-        <Routes>
-          <Route path="/" element={<Inbox />} />
-          <Route path="/send-email" element={<SendEmail />} />
-        </Routes>
-      </div>
-    </Router>
+  const theme = createTheme({ palette: { mode: 'dark' } });
+  // light atau dark
+
+  React.useEffect(() => {
+    console.log("App Dirender");
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <MyRoutes />
+      </Paper>
+    </ThemeProvider>
   );
 }
 
