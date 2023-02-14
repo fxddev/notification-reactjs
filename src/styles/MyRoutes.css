@@ -1,5 +1,11 @@
-._nav{
+._nav {
     text-decoration: none;
     color: inherit;
 }
 
+.my__topbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -14,6 +14,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
@@ -45,8 +47,10 @@ function MyRoutes(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    // https://javascript.plainenglish.io/how-to-pass-props-from-child-to-parent-component-in-react-d90752ff4d01
-    props.receivedata('My name is Dean Winchester & this is my brother Sammie');
+    // console.log(props.themepage);
+    const [themePage, setThemePage] = React.useState('');
+    setThemePage(props.themepage)
+
 
     const [triggerRender, setTriggerRender] = React.useState(0);
     React.useEffect(() => {
@@ -58,6 +62,11 @@ function MyRoutes(props) {
     //     // setId(receive_id);
     //     // }
     // });
+
+    function handleTheme() {
+        props.receivetoggle('light');
+        // https://javascript.plainenglish.io/how-to-pass-props-from-child-to-parent-component-in-react-d90752ff4d01
+    }
 
     function handleSidebarNavLink(statusPage) {
         // console.log(`page sekarang ${statusPage}`);
@@ -129,9 +138,22 @@ function MyRoutes(props) {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" noWrap component="div">
-                            Responsive drawer
-                        </Typography>
+                        <div className='my__topbar'>
+                            <Typography variant="h6" noWrap component="div">
+                                Responsive drawer
+                            </Typography>
+                            <IconButton aria-label="toggle theme" onClick={handleTheme}>
+                                {/* https://mui.com/material-ui/icons/ */}
+                                {/* https://mui.com/material-ui/material-icons/?query=dark&selected=DarkMode */}
+
+                                {themePage == 'dark' ?
+                                    <DarkModeIcon />
+                                    :
+                                    <Brightness7Icon />
+                                }
+
+                            </IconButton>
+                        </div>
                     </Toolbar>
                 </AppBar>
                 <Box

@@ -22,21 +22,22 @@ function App() {
 
   }, []);
 
-  const myTimeout = setTimeout(myGreeting, 5000);
+  // const myTimeout = setTimeout(myGreeting, 5000);
 
-  function myGreeting() {
-    setThemePage('light')
-    clearTimeout(myTimeout);
-  }
+  // function myGreeting() {
+  //   setThemePage('light')
+  //   clearTimeout(myTimeout);
+  // }
 
-  const handle_receivedata = (data) => {
-    console.log(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+  const handle_receivetoggle = (data) => {
+    // console.log(data);
+    setThemePage(data)
   }
 
   return (
     <ThemeProvider theme={theme}>
       <Paper>
-        <MyRoutes receivedata={handle_receivedata} />
+        <MyRoutes themepage={themePage} receivetoggle={handle_receivetoggle} />
       </Paper>
     </ThemeProvider>
   );
