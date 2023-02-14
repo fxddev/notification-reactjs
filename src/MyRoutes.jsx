@@ -47,14 +47,17 @@ function MyRoutes(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    // console.log(props.themepage);
-    const [themePage, setThemePage] = React.useState('');
-    setThemePage(props.themepage)
+    const themepage_props = props.themepage
+    console.log(themepage_props);
+    const [themePage, setThemePage] = React.useState('dark');
+    // 
 
 
     const [triggerRender, setTriggerRender] = React.useState(0);
     React.useEffect(() => {
         console.log("MyRoutes Dirender");
+
+        setThemePage(themepage_props)
     }, [triggerRender]);
 
     // PageCurrentlyStore.subscribe((receive) => {
@@ -63,8 +66,14 @@ function MyRoutes(props) {
     //     // }
     // });
 
-    function handleTheme() {
-        props.receivetoggle('light');
+    function handleTheme(themeProps) {
+
+        let opposite_theme = 'light'
+        if (themeProps == 'light') {
+            opposite_theme = 'dark'
+        }
+        setThemePage(opposite_theme)
+        props.receivetoggle(opposite_theme);
         // https://javascript.plainenglish.io/how-to-pass-props-from-child-to-parent-component-in-react-d90752ff4d01
     }
 
@@ -142,14 +151,14 @@ function MyRoutes(props) {
                             <Typography variant="h6" noWrap component="div">
                                 Responsive drawer
                             </Typography>
-                            <IconButton aria-label="toggle theme" onClick={handleTheme}>
+                            <IconButton color="inherit" aria-label="toggle theme" onClick={() => handleTheme(themePage)}>
                                 {/* https://mui.com/material-ui/icons/ */}
                                 {/* https://mui.com/material-ui/material-icons/?query=dark&selected=DarkMode */}
 
                                 {themePage == 'dark' ?
-                                    <DarkModeIcon />
-                                    :
                                     <Brightness7Icon />
+                                    :
+                                    <DarkModeIcon />
                                 }
 
                             </IconButton>
