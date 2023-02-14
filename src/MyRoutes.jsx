@@ -30,6 +30,7 @@ import {
 // kalo error pake Switch ganti ke Routes
 
 import Inbox from './pages/Inbox'
+import InboxDetails from './pages/InboxDetails'
 import SendEmail from './pages/SendEmail'
 
 import './styles/MyRoutes.css'
@@ -209,6 +210,7 @@ function MyRoutes(props) {
 
                     <Switch>
                         <Route path="/" exact component={Inbox} />
+                        <Route path="/inbox-details/:slug" component={InboxDetails} />
                         <Route path="/send-email" component={SendEmail} />
                     </Switch>
                     {/* klo pake switch ga realtime berubahnya */}
