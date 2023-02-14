@@ -5,43 +5,38 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import MyRoutes from './MyRoutes'
 
-import { PageCurrentlyStore } from "./MyStore";
+// import { PageCurrentlyStore } from "./MyStore";
 
 function App() {
 
-  const theme = createTheme({ palette: { mode: 'dark' } });
+  const [themePage, setThemePage] = React.useState('dark');
+  const theme = createTheme({ palette: { mode: themePage } });
   // light atau dark
 
-  const [pageCurrently, setPageCurrently] = React.useState("inbox");
   React.useEffect(() => {
     console.log("App Dirender");
 
-    const pathArray = window.location.pathname.split('/');
-    console.log(pathArray);
-    // if (pathArray[1] == "") {
-    //   console.log("Inbox");
-    // } else {
+    //   console.log("sdg passing pathArray[1] ke store");
     //   console.log(pathArray[1]);
-    //   setPageCurrently(pathArray[1])
-    // }
-    if (pathArray[1] != "") {
-      // console.log("sdg passing props PageCurrently");
-      // console.log(pathArray[1]);
-      // setPageCurrently(pathArray[1])
-  
-      console.log("sdg passing pathArray[1] ke store");
-      console.log(pathArray[1]);
-      PageCurrentlyStore.update((send) => pathArray[1]);
-    }
+    //   PageCurrentlyStore.update((send) => pathArray[1]);
 
   }, []);
 
-  
+  const myTimeout = setTimeout(myGreeting, 5000);
+
+  function myGreeting() {
+    setThemePage('light')
+    clearTimeout(myTimeout);
+  }
+
+  const handle_receivedata = (data) => {
+    console.log(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Paper>
-        <MyRoutes PageCurrently={pageCurrently} />
+        <MyRoutes receivedata={handle_receivedata} />
       </Paper>
     </ThemeProvider>
   );

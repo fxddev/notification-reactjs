@@ -45,72 +45,24 @@ function MyRoutes(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    // const [halamanBaruDirefresh, setHalamanBaruDirefresh] = React.useState(true);
-    const [pageCurrently, setPageCurrently] = React.useState("inbox");
-    // const [trickyStopSetPageCurrently, setTrickyStopSetPageCurrently] = React.useState(0);
-
-    // let page_skrng = "inbox"
+    // https://javascript.plainenglish.io/how-to-pass-props-from-child-to-parent-component-in-react-d90752ff4d01
+    props.receivedata('My name is Dean Winchester & this is my brother Sammie');
 
     const [triggerRender, setTriggerRender] = React.useState(0);
     React.useEffect(() => {
         console.log("MyRoutes Dirender");
-
-        // console.log("menerima props.PageCurrently");
-        // console.log(props.PageCurrently);
-        // if (props.PageCurrently != 'inbox') {
-        //     setTrickyStopSetPageCurrently(trickyStopSetPageCurrently + 1)
-        //     console.log("trickyStopSetPageCurrently");
-        //     console.log(trickyStopSetPageCurrently);
-
-        //     if (trickyStopSetPageCurrently < 2) {
-        //         setPageCurrently(props.PageCurrently)
-        //         // page_skrng = props.PageCurrently
-        //         console.log("sdg set page_skrng");
-        //     }
-        // }
-        // pake props malah tetep di home padahal refreshnya pas halaman selain home
-
-        PageCurrentlyStore.subscribe((receive) => {
-            // if (receive_id !== 0) {
-            // setId(receive_id);
-            // }
-            console.log("receive pathArray[1] dari store");
-            console.log(receive);
-
-            if (receive != 'inbox') {
-
-                // page_skrng = receive
-
-                if (receive !== 0) {
-                    setPageCurrently(receive)
-                }
-            }
-        });
-        // pake ini (store) work
-
     }, [triggerRender]);
 
     // PageCurrentlyStore.subscribe((receive) => {
     //     // if (receive_id !== 0) {
     //     // setId(receive_id);
     //     // }
-    //     console.log("receive");
-    //     console.log(receive);
-
-    //     if (receive != 'inbox') {
-    //         // setPageCurrently(receive)
-    //         page_skrng = receive
-    //     }
     // });
 
-    function handleSometing(statusPage) {
-        // setTriggerRender(triggerRender + 1)
+    function handleSidebarNavLink(statusPage) {
+        // console.log(`page sekarang ${statusPage}`);
 
-        // setHalamanBaruDirefresh(false)
-
-        console.log(`page sekarang ${statusPage}`);
-        setPageCurrently(statusPage)
-
+        // biar auto close sidebar ketika mode mobile
         setMobileOpen(!mobileOpen);
     }
 
@@ -132,7 +84,7 @@ function MyRoutes(props) {
             </List>
             <Divider />
             <List>
-                <Link to="/" className="_nav" onClick={() => handleSometing('inbox')}>
+                <Link to="/" className="_nav" onClick={() => handleSidebarNavLink('inbox')}>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon> <InboxIcon />
@@ -141,7 +93,7 @@ function MyRoutes(props) {
                         </ListItemButton>
                     </ListItem>
                 </Link>
-                <Link to="/send-email" className="_nav" onClick={() => handleSometing('send-email')}>
+                <Link to="/send-email" className="_nav" onClick={() => handleSidebarNavLink('send-email')}>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon> <InboxIcon />
@@ -225,36 +177,11 @@ function MyRoutes(props) {
                         <Route path="/send-email" element={<SendEmail />} />
                     </Routes> */}
 
-                    {/* <Switch>
+                    <Switch>
                         <Route path="/" exact component={Inbox} />
                         <Route path="/send-email" component={SendEmail} />
-                    </Switch> */}
+                    </Switch>
                     {/* klo pake switch ga realtime berubahnya */}
-
-                    {/* {halamanBaruDirefresh ?
-                        <>
-                            {page_skrng == 'inbox' ?
-                                <Inbox />
-                                :
-                                <SendEmail />
-                            }
-                        </>
-                        :
-                        <>
-                            {pageCurrently == 'inbox' ?
-                                <Inbox />
-                                :
-                                <SendEmail />
-                            }
-                        </>
-                    } */}
-
-                    {/* sekarang halaman {pageCurrently} */}
-                    {pageCurrently == 'inbox' ?
-                        <Inbox />
-                        :
-                        <SendEmail />
-                    }
 
                     {/* <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
