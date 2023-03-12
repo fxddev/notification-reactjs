@@ -1,8 +1,27 @@
 import Typography from '@mui/material/Typography';
 
 function SendEmail() {
+
+    async function handleNotif() {
+        window.Notification.requestPermission().then((perm) => {
+            if (perm === "granted") {
+                const notify = new window.Notification("First Notification",
+                    {
+                        body: "Hello Notification",
+                        //   icon: "logo192.png",
+                        tag: "Hello"
+                    });
+
+
+            } else {
+                console.log("Permission denied ");
+            }
+        });
+    }
+
     return (
         <>
+            <buttton onClick={handleNotif}>handleNotif</buttton>
             <p>SendEmail</p>
             <Typography paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
